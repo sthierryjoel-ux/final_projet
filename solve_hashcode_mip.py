@@ -155,7 +155,8 @@ def build_and_solve(data, mipgap=5e-3, timelimit=None, verbose=True):
     solve_end = time.time()
 
     if verbose:
-        if model.Status in [GRB.OPTIMAL, GRB.TIME_LIMIT, GRB.OPTIMAL_TOL]:
+       if model.Status in [GRB.OPTIMAL, GRB.TIME_LIMIT]:
+
             print(f"[solve] Résolution terminée en {solve_end - solve_start:.2f}s - obj {model.ObjVal:.2f}")
             if model.Status == GRB.OPTIMAL:
                 print("[solve] Statut : OPTIMAL")
@@ -163,8 +164,8 @@ def build_and_solve(data, mipgap=5e-3, timelimit=None, verbose=True):
                 print("[solve] Statut : LIMITE DE TEMPS")
             else:
                 print(f"[solve] Code statut : {model.Status}")
-        else:
-            print(f"[solve] Résolution terminée avec le statut {model.Status}")
+    else:
+        print(f"[solve] Résolution terminée avec le statut {model.Status}")
 
     return model, x, y
 
